@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block content %}
+   
+     
+            <form class="box is-mobile" method="POST"> {% csrf_token %}
+                <div class="field">
+                    <p class="control has-icons-left has-icons-right">
+                        <input class="input mt-3" name="username" id="inputUsername" type="text" placeholder="Username" />
+                        <span class="icon mt-3 is-small is-left">
+                            <i class="fas fa-envelope"></i>
+                        </span>
+                       
+                    </p>
+                </div>
+                <div class="field">
+                    <p class="control has-icons-left">
+                        <input class="input mt-3" type="password" name="password" id="inputPassword"
+                            placeholder="Password" />
+                        <span class="icon mt-3 is-small is-left">
+                            <i class="fas fa-lock"></i>
+                        </span>
+                    </p>
+                </div>
+                {% for field in login_form  %}
+                <p>
+                    {% for error in field.errors  %}
+                <p style="color:red">{{ error }}</p>
+                {% endfor %}
+                </p>
+                {% endfor %}
+                {% if login_form.non_field_errors %}
+                <div style="color: red">
+                    <p>{{ login_form.non_field_errors }}</p>
+                </div>
+                {% endif %}
+                <div class="field is-grouped mt-5">
+                    <div class="control">
+                        <button class="button is-link" type="submit">Login</button>
+                    </div>
+                    
+                    <div class="control mt-2">
+                       
+                    </div>
+
+                </div>
+            </form>
+
+
+
+{% endblock content %}

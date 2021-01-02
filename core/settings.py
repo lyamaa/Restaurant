@@ -128,3 +128,7 @@ MEDIA_URL = '/media/'
 STATIC_ROOT = BASE_DIR / 'static_cdn'
 MEDIA_ROOT = BASE_DIR / 'media_cdn'
 
+
+LOGIN_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = '/'
+
