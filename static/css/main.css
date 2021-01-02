@@ -11,14 +11,25 @@ body {
 
   .box {
     width: 40%;
-    margin-left: 18rem;
-    margin-top: 10rem;
+    margin-left: 25rem;
+    margin-top: 1%;
     box-shadow: 100px, 100px;
     -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
     -moz-box-shadow: 0 0 10px rgb(0, 0, 0);
+    border: solid;
   }
 
   .input {
     border-radius: 5%;
-    border-color: blue;
+    border: solid;
+  }
+
+  .image {
+    margin-left: 11rem;
+  }
+ 
+  .title{
+    margin-left: 12rem;
+    padding-top: 1rem;
+    align-items: center;
   }

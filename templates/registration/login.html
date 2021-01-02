@@ -4,6 +4,11 @@
    
      
             <form class="box is-mobile" method="POST"> {% csrf_token %}
+                <figure class="image is-128x128">
+                <img class="is-rounded" src="https://bulma.io/images/placeholders/128x128.png">
+                </figure>
+
+                <p class="title">Sign-In</p>
                 <div class="field">
                     <p class="control has-icons-left has-icons-right">
                         <input class="input mt-3" name="username" id="inputUsername" type="text" placeholder="Username" />

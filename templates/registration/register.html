@@ -1,7 +1,128 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="box">
-    <p class='title'>Sign Up</p>
-</div>
+
+    
+    <form class="box is-mobile" method="POST"  enctype="multipart/form-data"> {% csrf_token %}
+    <p class='title' >Sign Up</p>
+        <div class="field">
+            <p class="control has-icons-left has-icons-right">
+                <input class="input mt-3" name="username" id="inputUsername" type="text" placeholder="Username" />
+                <span class="icon mt-3 is-small is-left">
+                    <i class="fas fa-envelope"></i>
+                </span>
+
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input mt-3" type="password" name="password" id="inputPassword" placeholder="Password" />
+                <span class="icon mt-3 is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input mt-3" type="text" name="first_name" id="inputFirstName" placeholder="First Name" />
+                <span class="icon mt-3 is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input mt-3" type="text" name="last_name" id="inputLastName" placeholder="Last Name" />
+                <span class="icon mt-3 is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input mt-3" type="text" name="email" id="inputEmail" placeholder="Email" />
+                <span class="icon mt-3 is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input mt-3" type="text" name="name" id="inputName" placeholder="Name" />
+                <span class="icon mt-3 is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input mt-3" type="text" name="phone" id="inputPhone" placeholder="Phone" />
+                <span class="icon mt-3 is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <p class="control has-icons-left">
+                <input class="input mt-3" type="text" name="address" id="inputAddress" placeholder="Address" />
+                <span class="icon mt-3 is-small is-left">
+                    <i class="fas fa-lock"></i>
+                </span>
+            </p>
+        </div>
+        <div class="field">
+            <div class="file is-centered is-boxed is-success has-name">
+                <label class="file-label">
+                    <input class="file-input" type="file" name="logo" />
+                    <span class="file-cta">
+                        <span class="file-icon">
+                            <i class="fas fa-upload"></i>
+                        </span>
+                        <span class="file-label"> Image Upload </span>
+                    </span>
+                    <span class="file-name">
+                        Screen Shot 2017-07-29 at 15.54.25.png
+                    </span>
+                </label>
+            </div>
+        </div>
+        {% for field in user_form  %}
+        <p>
+            {% for error in field.errors  %}
+            <p style="color:red">{{ error }}</p>
+            {% endfor %}
+        </p>
+        {% endfor %}
+        {% if user_form.non_field_errors %}
+        <div style="color: red">
+            <p>{{ user_form.non_field_errors }}</p>
+        </div>
+        {% endif %}
+
+        {% for field in restaurant_form  %}
+        <p>
+            {% for error in field.errors  %}
+            <p style="color:red">{{ error }}</p>
+            {% endfor %}
+        </p>
+        {% endfor %}
+        {% if restaurant_form.non_field_errors %}
+        <div style="color: red">
+            <p>{{ restaurant_form.non_field_errors }}</p>
+        </div>
+        {% endif %}
+        <div class="field is-grouped mt-5">
+            <div class="control">
+                <button class="button is-link" type="submit">Register</button>
+            </div>
+
+            <div class="control mt-2">
+
+            </div>
+
+        </div>
+    </form>
+
+
 {% endblock content %}

@@ -1,0 +1,24 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #F3F3F3;
+  }
+
+  #wrapper {
+    flex: 1;
+  }
+
+  .box {
+    width: 40%;
+    margin-left: 18rem;
+   
+    box-shadow: 100px, 100px;
+    -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
+    -moz-box-shadow: 0 0 10px rgb(0, 0, 0);
+  }
+
+  .input {
+    border-radius: 5%;
+    border-color: blue;
+  }
