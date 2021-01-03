@@ -15,7 +15,7 @@ urlpatterns = [
          'template_name': 'registration/register.html'}, name="login"),
     path('auth/logout', auth_views.LogoutView.as_view(),
          {'next_page': '/'}, name="logout"),
-    re_path(r'^api/social', include('rest_framework_social_oauth2.urls')),
+    re_path(r'^api/social/', include('rest_framework_social_oauth2.urls')),
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL,
