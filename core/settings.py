@@ -120,18 +120,21 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
-STATICFILES_DIRS = [
-    BASE_DIR / 'static',
-    BASE_DIR / 'media',
-]
+
 STATIC_URL = '/static/'
 MEDIA_URL = '/media/'
 STATIC_ROOT = BASE_DIR / 'static_cdn'
 MEDIA_ROOT = BASE_DIR / 'media_cdn'
 
+STATICFILES_DIRS = [
+    BASE_DIR / 'static',
+    BASE_DIR / 'media',
+]
 
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
+
+
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
