@@ -1,0 +1,35 @@
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+    background-color: #F3F3F3;
+  }
+
+  #wrapper {
+    flex: 1;
+  }
+
+  .box {
+    width: 40%;
+    margin-left: 25rem;
+    margin-top: 1%;
+    box-shadow: 100px, 100px;
+    -webkit-box-shadow: 0 0 10px rgb(0, 0, 0);
+    -moz-box-shadow: 0 0 10px rgb(0, 0, 0);
+    border: solid;
+  }
+
+  .input {
+    border-radius: 5%;
+    border: solid;
+  }
+
+  .image {
+    margin-left: 11rem;
+  }
+ 
+  .title{
+    margin-left: 12rem;
+    padding-top: 1rem;
+    align-items: center;
+  }
