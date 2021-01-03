@@ -4,3 +4,4 @@ migrations/
 db.sqlite3
 static_cdn
 media_cdn
+.vscode/
