@@ -1,0 +1,61 @@
+{% extends 'restaurant/main.html' %}
+
+
+{% block main %}
+
+    <table class="table mt-2">
+        <thead>
+          <tr>
+            <th><abbr title="id">Id</abbr></th>
+            <th><abbr title="name">Order Details</abbr></th>
+            <th><abbr title="desc">Customer</abbr></th>
+            <th><abbr title="Lost">Driver</abbr></th>
+            <th><abbr title="Lost">Total</abbr></th>
+             <th><abbr title="Lost">Status</abbr></th>
+              <th><abbr title="Lost">Action</abbr></th>
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+            <th><abbr title="id">Id</abbr></th>
+            <th><abbr title="name">Order Details</abbr></th>
+            <th><abbr title="desc">Customer</abbr></th>
+            <th><abbr title="Lost">Driver</abbr></th>
+            <th><abbr title="Lost">Total</abbr></th>
+             <th><abbr title="Lost">Status</abbr></th>
+              <th><abbr title="Lost">Action</abbr></th>
+          </tr>
+        </tfoot>
+        <tbody>
+
+         {% for order in orders %}
+             <tr>
+                <td>{{order.id}}</td>
+                <td>
+                   {% for od in order.order_details.all  %}
+                        {{od.food.name}} {{od.food.price}} * {{od.quantity}} = {{od.sub_total}}
+                   {% endfor %} 
+                </td>
+                <td>{{order.customer}}</td>
+                <td>{{order.driver}}</td>
+                <td>{{order.total}}</td>
+               <td>{{order.get_status_display}}</td>
+               <td>
+                {% if order.status == 1 %}
+                    <form method="POST">
+                        {% csrf_token %}
+                        <input type="hidden" name="id" value={{order.id}} />
+                        <button class="button is-info">Ready</button>
+                    </form>
+                {% endif %}
+               </td>
+
+            
+           
+           
+            </tr>
+        
+         {% endfor %}
+        </tbody>
+      </table>
+{% endblock main %}

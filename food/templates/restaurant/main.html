@@ -1,0 +1,37 @@
+
+{% extends 'base.html' %} 
+{% block title %}  {% endblock title %} 
+{% block script %}
+    <script>
+      $document.ready(function() {
+        let now = new Date();
+        setInterval(function(){
+          $.ajax({
+            url: '/api/restaurant/order/notofication/' + now.toISOString() + '/',
+            method: 'GET',
+            success: function(data) {
+              if (data['notification'] == 0){
+                $('.icon').text('');
+
+              }else {
+                $('.icon').text(data['notification'])
+              }
+            }
+          })
+        }, 3000)
+      })
+    </script>
+    {% endblock script %}
+
+{% block side %}
+     <div class="columns">
+       <div class="column is-3">
+         {% include 'restaurant/sidebar.html' %}
+       </div>
+       <div class="column is-8">
+         {% block main %}
+         {% endblock main %}
+       </div>
+     </div>
+{% endblock side %}
+

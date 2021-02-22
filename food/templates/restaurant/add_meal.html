@@ -1,0 +1,75 @@
+{% extends 'restaurant/main.html' %}
+{% block title %}
+    Add Meal
+{% endblock title %}
+
+
+{% block main %}
+     <form class="is-mobile" method="POST"  enctype="multipart/form-data"> {% csrf_token %}
+        <p class='title'>Add Food</p>
+            
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input mt-3" type="text" name="name" id="inputName" placeholder="Food Name" /> 
+                    <span class="icon mt-3 is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+    
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input mt-3" type="text" name="description" id="inputdescription" placeholder="Food Desc" /> 
+                    <span class="icon mt-3 is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+            <div class="field">
+                <p class="control has-icons-left">
+                    <input class="input mt-3" type="number" name="price" id="inputPrice"  /> 
+                    <span class="icon mt-3 is-small is-left">
+                        <i class="fas fa-lock"></i>
+                    </span>
+                </p>
+            </div>
+           
+            
+            <div class="field">
+                <div class="file is-centered is-boxed is-success has-name">
+                    <label class="file-label">
+                        <input class="file-input" type="file" name="image" />
+                       
+                        <span class="file-name mt-2 card">
+                          <div>{{form.image}} </div>
+                        </span>
+                    </label>
+                </div>
+            </div>
+            {% for field in form %}
+           <p>
+             {% for error in field.errors %}
+             <p style="color: red">{{ error }}</p>
+             {% endfor %}
+           </p>
+           {% endfor %}
+           {% if form.non_field_errors %}
+           <div style="color: red">
+             <p>{{form.non_field_errors}}</p>
+           </div>
+     
+           {% endif %}
+    
+          
+            <div class="field is-grouped mt-5">
+                <div class="control">
+                    <button class="button is-link" type="submit">Add</button>
+                </div>
+    
+                <div class="control mt-2">
+    
+                </div>
+    
+            </div>
+        </form>
+{% endblock main %}

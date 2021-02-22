@@ -1,0 +1,52 @@
+{% extends 'restaurant/main.html' %}
+{% block title %}
+    Meal
+{% endblock title %}
+
+{% block main %}
+    <a class="button" href="{% url 'restaurant-meal-add'%}">Create</a>
+    <table class="table mt-2">
+        <thead>
+          <tr>
+        
+            <th><abbr title="id">Id</abbr></th>
+            <th><abbr title="name">Name</abbr></th>
+            <th><abbr title="desc">Desc</abbr></th>
+            <th><abbr title="Lost">price</abbr></th>
+            <th><abbr title="Lost">Image</abbr></th>
+            
+          </tr>
+        </thead>
+        <tfoot>
+          <tr>
+           
+            <th><abbr title="id">Id</abbr></th>
+            <th><abbr title="name">Name</abbr></th>
+            <th><abbr title="desc">Desc</abbr></th>
+            <th><abbr title="Lost">price</abbr></th>
+            <th><abbr title="Lost">Image</abbr></th>
+          </tr>
+        </tfoot>
+        <tbody>
+
+         {% for food in foods %}
+             <tr>
+                <td>{{food.id}}</td>
+                <td><a href="{% url 'restaurant-meal-edit' food.id %}">{{food.name}}</a></td>
+                <td>{{food.description}}</td>
+                <td>{{food.price}}</td>
+                <td><figure class="image is-128x128">
+                    <img src="{{food.image.url}}">
+                  </figure></td>
+
+            
+           
+           
+            </tr>
+        
+         {% endfor %}
+        </tbody>
+      </table>
+     
+{% endblock main %}
+    
