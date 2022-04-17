@@ -38,43 +38,44 @@ class CustomerGetFood(APIView):
 class CustomerAddOrder(APIView):
 
     def post(self, request):
-        if request.method == "POST":
-            access_token = AccessToken.objects.get(
-                token=request.POST.get("access_token"), expires__gt=timezone.now())
-            customer = access_token.user.customer
+        if request.method != "POST":
+            return
+        access_token = AccessToken.objects.get(
+            token=request.POST.get("access_token"), expires__gt=timezone.now())
+        customer = access_token.user.customer
 
-            if Order.objects.filter(customer=customer).exclude(status=Order.DELIVERED):
-                return Response({"status": "Fail", "error": "Your last order must be completed."})
+        if Order.objects.filter(customer=customer).exclude(status=Order.DELIVERED):
+            return Response({"status": "Fail", "error": "Your last order must be completed."})
 
-            # Check address
-            if not request.POST["address"]:
-                return Response({"status": "failed", "error": "Address is required"})
+        # Check address
+        if not request.POST["address"]:
+            return Response({"status": "failed", "error": "Address is required"})
 
-            order_details = json.loads(request.POST["order_details"])
-            order_total = 0
+        order_details = json.loads(request.POST["order_details"])
+        order_total = sum(
+            Food.objects.get(id=food["food_id"]).price * food["quantity"]
+            for food in order_details
+        )
+
+        if len(order_details) > 0:
+            order = Order.objects.create(
+                customer=customer,
+                restaurant_id=request.POST["restaurant_id"],
+                total=order_total,
+                status=Order.COOKING,
+                address=request.POST["address"]
+            )
+
             for food in order_details:
-                order_total += Food.objects.get(
-                    id=food["food_id"]).price * food["quantity"]
-
-            if len(order_details) > 0:
-                order = Order.objects.create(
-                    customer=customer,
-                    restaurant_id=request.POST["restaurant_id"],
-                    total=order_total,
-                    status=Order.COOKING,
-                    address=request.POST["address"]
+                OrderDetail.objects.create(
+                    order=order,
+                    food_id=food["food_id"],
+                    quantity=food["quantity"],
+                    sub_total=Food.objects.get(
+                        id=food["food_id"]).price * food["quantity"]
                 )
 
-                for food in order_details:
-                    OrderDetail.objects.create(
-                        order=order,
-                        food_id=food["food_id"],
-                        quantity=food["quantity"],
-                        sub_total=Food.objects.get(
-                            id=food["food_id"]).price * food["quantity"]
-                    )
-
-                    return Response({"status": "success"})
+                return Response({"status": "success"})
 
 
 class CustomerGetLatestOrder(APIView):
@@ -83,8 +84,10 @@ class CustomerGetLatestOrder(APIView):
 
 
 class OrderNotify(APIView):
-    def get(request, last_request_time):
+    def get(self, last_request_time):
         notification = Order.objects.filter(
-            restaurant=request.user.restaurant, created_at__gt=last_request_time).count()
-        
+            restaurant=self.user.restaurant, created_at__gt=last_request_time
+        ).count()
+
+
         return Response({notification.data})
